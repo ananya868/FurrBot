@@ -1,4 +1,4 @@
-# Furr Bot - AI
+# Furr Bot
 A RAG-based Chatbot designed to assist pet care owners, pet veterans with verified and reliable information for their pets! The app sources its knowledge from a database containing pet blogs written by verified pet doctors. Custom Re-Ranking method has been used to filter out the best matches. Integrated CI/CD for scheduled data updation using Github Actions to ensure latest data! Autmated data pipeline to handle data ingestion, pre-processing, chunking and metadata creation tasks. More dynamic and can stay up-to-date because it retrieves current and specific information from its knowledge base, regardless of the model’s training data.
 
 <p align="center">
