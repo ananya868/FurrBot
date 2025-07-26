@@ -9,9 +9,14 @@ Furrbot Chatbot API
 
 import os, json, time, datetime
 import asyncio
+
+from dotenv import load_dotenv
+load_dotenv()  # Load environment variables from .env file
+
 from pydantic import BaseModel, Field
 from typing import Optional, Any
 from fastapi import FastAPI, Depends, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 
 from RAG.llms import LLM 
 from RAG.db import PineconeDB
@@ -108,6 +113,15 @@ class PetChatbotFactory:
 
 # Fast API app 
 app = FastAPI()
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"], # Allows all origins
+    allow_credentials=True,
+    allow_methods=["*"], # Allows all methods
+    allow_headers=["*"], # Allows all headers
+)
 
 chatbot_factory = None # Global Factory to manage chatbot instances
 @app.on_event("startup")

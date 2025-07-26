@@ -57,20 +57,43 @@ class OpenAILLM(LLM):
         assert isinstance(prompt, str), "Prompt must be a string."
         assert isinstance(kwargs, dict), "kwargs must be a dictionary."
         try:
-            response = self.client.beta.chat.completions.parse(
-                model = self.model,
-                messages = [{
-                    "role": "user",
-                    "content": prompt
-                }],
-                response_format = OutputSchema, 
-                temperature = kwargs.get("temperature", 0.8),
-                max_tokens = kwargs.get("max_tokens", 1624),
-            )
+            # Try structured output first (for models that support it)
+            try:
+                response = self.client.beta.chat.completions.parse(
+                    model = self.model,
+                    messages = [{
+                        "role": "user",
+                        "content": prompt
+                    }],
+                    response_format = OutputSchema, 
+                    temperature = kwargs.get("temperature", 0.8),
+                    max_tokens = kwargs.get("max_tokens", 1624),
+                )
+                return response.choices[0].message.content
+            except Exception as structured_error:
+                # Fall back to regular chat completion for models that don't support structured output
+                print(f"Structured output not supported for {self.model}, falling back to regular completion")
+                response = self.client.chat.completions.create(
+                    model = self.model,
+                    messages = [{
+                        "role": "user",
+                        "content": prompt
+                    }],
+                    temperature = kwargs.get("temperature", 0.8),
+                    max_tokens = kwargs.get("max_tokens", 1624),
+                )
+                # Format the response as JSON since the backend expects it
+                plain_response = response.choices[0].message.content
+                # Create a simple JSON structure
+                json_response = {
+                    "answer": plain_response,
+                    "followup": "Would you like to know more about this topic?"
+                }
+                import json
+                return json.dumps(json_response)
         except Exception as e:
             print(f"Error generating text: {e}")
             raise Exception(f"Error: {e}")
-        return response.choices[0].message.content
 
 
 class GoogleLLM(LLM):

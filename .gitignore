@@ -8,6 +8,7 @@ __pycache__/
 
 # Folders 
 pdf_data/
+fbenv/
 
 # Distribution / packaging
 .Python
