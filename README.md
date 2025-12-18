@@ -5,8 +5,8 @@
 The application has been re-architected into a robust **Headless** system with a **FastAPI** backend and a sleek **React** frontend. It leverages **Pinecone** for vector storage and supports multiple LLM providers (OpenAI, Google Gemini, Anthropic Claude, Mistral).
 
 <div style="display:flex; gap:10px;">
-  <img src="assets/p1.png" width="500">
-  <img src="assets/p2.png" width="500">
+  <img src="assets/p1.png" width="400">
+  <img src="assets/p2.png" width="400">
 </div>
 
 
