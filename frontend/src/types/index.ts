@@ -3,7 +3,7 @@ export interface Message {
   content: string;
   sender: 'user' | 'bot';
   timestamp: Date;
-  followup?: string;
+  followup?: string | string[] | any;
 }
 
 export interface ChatConfig {

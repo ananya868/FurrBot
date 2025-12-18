@@ -1,74 +1,51 @@
 import React from 'react';
-import { User, Mail, FileText, Settings, RefreshCw } from 'lucide-react';
+import { Bot, Sparkles } from 'lucide-react';
+
+import { NAMESPACE_QUESTIONS } from '../constants/questions';
+import { NamespaceKey } from '../constants/namespaces';
 
 interface WelcomeProps {
   onSendMessage: (message: string) => void;
+  currentNamespace: string;
 }
 
-const Welcome: React.FC<WelcomeProps> = ({ onSendMessage }) => {
-  const promptCards = [
-    {
-      text: "What's the best food for my dog's breed?",
-      icon: User,
-      color: "text-blue-500"
-    },
-    {
-      text: "How can I train my cat to use the litter box?",
-      icon: Mail,
-      color: "text-green-500"
-    },
-    {
-      text: "What are common health issues in pets?",
-      icon: FileText,
-      color: "text-purple-500"
-    },
-    {
-      text: "How often should I groom my pet?",
-      icon: Settings,
-      color: "text-orange-500"
-    }
-  ];
+const Welcome: React.FC<WelcomeProps> = ({ onSendMessage, currentNamespace }) => {
+  const suggestions = NAMESPACE_QUESTIONS[currentNamespace as NamespaceKey] ||
+    NAMESPACE_QUESTIONS['dogs']; // Fallback to dogs if something goes wrong
 
   return (
-    <div className="content-area flex flex-col items-center justify-center text-center">
-      {/* Greeting */}
-      <div className="mb-8">
-        <h1 className="text-4xl font-bold text-gray-900 mb-2">
-          Hi there, <span className="text-purple-600">Pet Parent</span>
-        </h1>
-        <h2 className="text-2xl font-semibold text-gray-900">
-          What would you like to know?
-        </h2>
+    <div className="flex-1 flex flex-col items-center justify-center p-8 text-center animate-in fade-in duration-500">
+      <div className="mb-8 relative">
+        <div className="w-20 h-20 bg-gray-900 rounded-2xl flex items-center justify-center shadow-lg transform rotate-3 transition-transform hover:rotate-6 duration-300">
+          <Bot className="w-10 h-10 text-white" />
+        </div>
+        <div className="absolute -top-2 -right-2 bg-yellow-400 p-1.5 rounded-full shadow-sm animate-bounce">
+          <Sparkles className="w-4 h-4 text-yellow-900" />
+        </div>
       </div>
 
-      {/* Instructional Text */}
-      <p className="text-gray-600 mb-8 max-w-md">
-        Use one of the most common prompts below or use your own to begin
+      <h2 className="text-2xl font-bold text-gray-900 mb-2 tracking-tight">
+        Welcome to FurrBot
+      </h2>
+      <p className="text-gray-500 max-w-sm mb-12 leading-relaxed">
+        Your AI companion for all things pets. Select a category above or start chatting below.
       </p>
 
-      {/* Prompt Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8 max-w-2xl w-full">
-        {promptCards.map((card, index) => (
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 w-full max-w-2xl">
+        {suggestions.map((suggestion, index) => (
           <button
             key={index}
-            onClick={() => onSendMessage(card.text)}
-            className="prompt-card text-left"
+            onClick={() => onSendMessage(suggestion)}
+            className="group p-4 bg-white border border-gray-100 hover:border-gray-300 rounded-xl text-left transition-all duration-200 hover:shadow-sm"
           >
-            <p className="text-sm text-gray-700 mb-3">{card.text}</p>
-            <div className={`${card.color} flex justify-center`}>
-              <card.icon className="w-4 h-4" />
-            </div>
+            <p className="text-sm font-medium text-gray-700 group-hover:text-gray-900 transition-colors">
+              {suggestion}
+            </p>
           </button>
         ))}
       </div>
-
-      {/* Refresh Prompts */}
-      <button className="text-sm text-gray-500 hover:text-purple-600 transition-colors flex items-center space-x-1 mb-8">
-        <RefreshCw className="w-4 h-4" />
-        <span>Refresh Prompts</span>
-      </button>
     </div>
   );
 };
 
-export default Welcome; 
+export default Welcome;

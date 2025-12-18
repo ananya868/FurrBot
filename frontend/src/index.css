@@ -4,56 +4,36 @@
 
 @layer base {
   body {
-    @apply bg-gray-100 text-gray-900 font-sans;
+    @apply bg-gray-50 text-gray-900 font-sans antialiased;
   }
 }
 
 @layer components {
+  /* Custom Scrollbar for Webkit */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-200 rounded-full hover:bg-gray-300 transition-colors;
+  }
+
   .chat-container {
-    @apply h-screen flex;
+    @apply h-screen flex flex-col bg-white;
   }
-  
-  .sidebar {
-    @apply w-16 bg-gray-800 flex flex-col items-center py-6 space-y-6;
+
+  /* Animations */
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
   }
-  
-  .main-content {
-    @apply flex-1 bg-gray-50 flex flex-col;
-  }
-  
-  .content-area {
-    @apply flex-1 p-8 max-w-4xl mx-auto w-full;
-  }
-  
-  .message-bubble {
-    @apply max-w-xs lg:max-w-md px-4 py-3 rounded-lg mb-4;
-  }
-  
-  .user-message {
-    @apply bg-purple-600 text-white ml-auto;
-  }
-  
-  .bot-message {
-    @apply bg-white text-gray-800 border border-gray-200 shadow-sm;
-  }
-  
-  .input-area {
-    @apply bg-white border-t border-gray-200 p-6;
-  }
-  
-  .chat-input {
-    @apply w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none;
-  }
-  
-  .prompt-card {
-    @apply bg-white p-4 rounded-lg border border-gray-200 hover:border-purple-300 transition-colors cursor-pointer shadow-sm;
-  }
-  
-  .sidebar-icon {
-    @apply w-10 h-10 rounded-lg bg-gray-700 hover:bg-gray-600 flex items-center justify-center text-gray-300 hover:text-white transition-colors cursor-pointer;
-  }
-  
-  .sidebar-icon.active {
-    @apply bg-purple-600 text-white;
+
+  .animate-slide-up {
+    animation: slideUp 0.3s ease-out forwards;
   }
 }

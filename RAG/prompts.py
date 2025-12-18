@@ -38,7 +38,7 @@ class PromptTemplate:
                         otherwise answer using the retrieved context. Also suggest 3 follow-up questions to keep the conversation going.
                     - Your answer should be in a friendly way, make sure to use some markdown formatting like making the important points **bold**,
                         or give point wise answer for better clearness, use emojis in most sentences to represent emotions (must do).
-                    - Also generate 3 follow-up questions to keep the conversation going.
+                    - Also generate 3 follow-up questions to keep the conversation going. The questions should be from the USER'S perspective (First person), e.g., "How can I..." instead of "How to...".
 
                 OUTPUT FORMAT: 
                 - Answer (Your response to the user)
