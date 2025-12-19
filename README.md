@@ -11,13 +11,11 @@ The application has been re-architected into a robust **Headless** system with a
 
 
 
-## **Core Features:** 
+## 📌 Core Features  
 - Chat about anything related to your pet, being it health, diet, training, grooming, etc.
 - More than 18 animal categories (detailed list in raw-data-info.md)
 - 200+ Dog breeds, 60+ Cat breeds, 100+ horse breeds, etc
 - Prompt tuning to improve answers and context aware conversation
-- Real-time data updation using CI/CD
-- Bias detection and mitigation using AI-Agents
 
 ---
 
@@ -27,7 +25,7 @@ The project is split into two main components:
 
 1.  **Backend (`/`)**: Python/FastAPI application that handles RAG logic, database querying, and LLM interaction.
 2.  **Frontend (`/frontend`)**: React application that provides the user interface.
-
+3.  **src/steps**: The complete reusable data preparation and processing pipeline.
 ---
 
 ## 💻 Installation & Setup
