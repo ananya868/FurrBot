@@ -1,6 +1,6 @@
-# FurrBot 🐾
+# FurrBot 
 
-**FurrBot** is a modern, RAG-based AI Chatbot designed to assist pet owners and veterinarians with verified and reliable information. Unlike generic chatbots, FurrBot sources its knowledge from a curated database of pet health blogs and docs, ensuring accurate and context-aware responses.
+**FurrBot** is a RAG-based AI Chatbot designed to assist pet owners and veterinarians with reliable information. Unlike generic chatbots, Furrbot sources its knowledge from a curated database of pet health blogs and documentation written by verified pet veterans, ensuring accurate, reliable, and context-aware responses.
 
 The application has been re-architected into a robust **Headless** system with a **FastAPI** backend and a sleek **React** frontend. It leverages **Pinecone** for vector storage and supports multiple LLM providers (OpenAI, Google Gemini, Anthropic Claude, Mistral).
 
@@ -8,8 +8,6 @@ The application has been re-architected into a robust **Headless** system with a
   <img src="assets/p1.png" width="400">
   <img src="assets/p2.png" width="400">
 </div>
-
-
 
 ## 📌 Core Features  
 - Chat about anything related to your pet, being it health, diet, training, grooming, etc.
